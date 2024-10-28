@@ -10,11 +10,21 @@
 
 
 function addSuccessPercent(olympicRepresentation) {
-  return olympicRepresentation.map(item => {
-    const percentOfSuccess = ((item.medals / item.athletes) * 100).toFixed(1); // Рассчитываем процент успеха и округляем
-    return { ...item, percentOfSuccess: parseFloat(percentOfSuccess) }; // Возвращаем новый объект с добавленным полем
-  });
-}
+    return olympicRepresentation.map(sport => {
+      let percentOfSuccess = "0";
+      
+      if (sport.athletes > 0) {
+        const calculatedPercentage = (sport.medals / sport.athletes) * 100;
+        percentOfSuccess = calculatedPercentage.toFixed(1); 
+      }
+      
+      return {
+        ...sport,
+        percentOfSuccess: percentOfSuccess + '%' 
+      };
+    });
+  }
+
 
 const olympicRepresentation = [
   { sport: 'Swimming', athletes: 20, medals: 6 },
